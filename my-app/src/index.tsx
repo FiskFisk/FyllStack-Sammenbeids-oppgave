@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App'; // Import the App component
+import './index.css'; // Import global CSS styles if you have any
 
-function App() {
-  const [message, setMessage] = useState("");
+const rootElement = document.getElementById('root'); // Get the root element
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/test")
-      .then(response => setMessage(response.data.message))
-      .catch(error => console.error("Error fetching data:", error));
-  }, []);
-
-  return (
-    <div>
-      <h1>React + Flask</h1>
-      <p>Backend says: {message}</p>
-    </div>
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement); // Create a root
+  root.render(
+    <React.StrictMode>
+      <App /> {/* Render the App component */}
+    </React.StrictMode>
   );
 }
-
-export default App;
