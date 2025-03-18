@@ -52,6 +52,12 @@ def login():
         cursor.close()
         conn.close()
 
+# This tiny little baby right here is the logout route ;D
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()  # Clear all session data
+    return jsonify({"message": "Logged out successfully YAYAYAY!"}), 200
+
 
 # Route for creating a new user
 @app.route('/create_user', methods=['POST'])
@@ -145,10 +151,17 @@ def get_quiz_results():
         cursor.close()
         conn.close()
 
+#MY SHAYLAAAAAAAAAAAAAA, just takes checks that everything is working, because anxiety 😔
+@app.route('/health', methods=['GET'])
+def health():
+    print("Health endpoint was accessed.")
+    return jsonify({"status": "ok"}), 200
+
+
 
 @app.route("/api/test", methods=["GET"])
 def test():
     return jsonify({"message": "Hello from Flask!"})
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000) #DETTE GJØR VI IKKE MEN SIDEN JEG VET IKKE IFØLGE NOE SÅ JEG DET VÆRE SÅNN :D
+    app.run(debug=True, host='0.0.0.0', port=5000) #DETTE GJØR VI IKKE MEN SIDEN JEG VET IKKE GENTLIG???? IFØLGE NOEN SÅ MÅ JEG LA DET VÆRE SÅNN :D
