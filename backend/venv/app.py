@@ -8,7 +8,7 @@ from config import db_config
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"  # Needed for sessions
-CORS(app)  # Allows the frontend to communicate with the backend (VERSTE FORKLARING BTW U.U)
+CORS(app)  # Allows the frontend to communicate with the backend (VERSTE FORKLARING BTW)
 
 def get_db_connection(): # This basically takes the database configuration from config.py and connects to the database YAY!
     return mysql.connector.connect(**db_config)
