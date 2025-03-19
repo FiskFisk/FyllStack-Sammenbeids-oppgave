@@ -4,7 +4,7 @@ import mysql.connector
 import json
 import os
 import bcrypt
-from config import db_config
+from backend.venv.config import db_config
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"  # Needed for sessions
