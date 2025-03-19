@@ -1,27 +1,18 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import "./App.css"; // Make sure to import your CSS file
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import MainMenu from "./pages/MainMenu";
 
 function App() {
-  const [message, setMessage] = useState("Loading..."); // Set a default message
-
-  useEffect(() => {
-    // Change the URL to your backend IP if needed
-    axios.get("http://localhost:5000/api/test") 
-      .then(response => setMessage(response.data.message))
-      .catch(error => {
-        console.error("Error fetching data:", error);
-        setMessage("Failed to fetch message."); // Set error message
-      });
-  }, []);
-
   return (
-    <div className="app-container">
-      <h1>React + Flask</h1>
-      <div className="message-box">
-        <p>Backend says: {message}</p>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/main-menu" element={<MainMenu />} />
+      </Routes>
+    </Router>
   );
 }
 
