@@ -1,15 +1,14 @@
 from flask import Flask, request, jsonify, session
-from flask_cors import CORS
 import mysql.connector
 import json
 import os
 import bcrypt
 from config import db_config
+from flask_cors import CORS
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key_here"  # Needed for sessions
-# ✅ Updated CORS configuration to allow requests from localhost:3000
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}}, supports_credentials=True)
+app.secret_key = "your_secret_key_here"
+CORS(app, supports_credentials=True)  # Allow cookies (sessions) across requests
 
 
 def get_db_connection(): # This basically takes the database configuration from config.py and connects to the database YAY!
@@ -64,48 +63,51 @@ def logout():
 # Route for creating a new user
 @app.route('/create_user', methods=['POST'])
 def create_user():
-    # Create a new connection and cursor for this request
+    print("Received request to create user")
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
+
     try:
         data = request.get_json()
-        # Check if all required fields are provided
+        print("Received data:", data)  # ✅ Print received data
+
+        if not data:
+            return jsonify({"error": "Invalid JSON format"}), 400
+
         if not all(key in data for key in ('e_post', 'passord', 'fullnavn', 'telefon')):
-            return jsonify({"error": "E-post, passord, fullnavn, og telefon er påkrevd pretty please"}), 400
+            return jsonify({"error": "E-post, passord, fullnavn, og telefon er påkrevd"}), 400
 
         e_post = data['e_post']
         passord = data['passord']
         fullnavn = data['fullnavn']
         telefon = data['telefon']
 
-        # Check if the email already exists in the database
+        # Check if email already exists
         query = "SELECT e_post FROM bruker WHERE e_post = %s"
         cursor.execute(query, (e_post,))
         if cursor.fetchone():
             return jsonify({"error": "E-posten er allerede registrert"}), 409
 
-        # Hash the password using bcrypt
+        # Hash password
         hashed_passord = bcrypt.hashpw(passord.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
         query = """
             INSERT INTO bruker (e_post, passord, fullnavn, telefon)
             VALUES (%s, %s, %s, %s)
         """
-        values = (e_post, hashed_passord, fullnavn, telefon)
-        cursor.execute(query, values)
+        cursor.execute(query, (e_post, hashed_passord, fullnavn, telefon))
         conn.commit()
 
         return jsonify({"message": "Brukeren ble opprettet!", "redirect": "/"}), 201
 
-    except mysql.connector.Error as e:
-        print(f"Databasefeil under oppretting av bruker: {e}")
-        return jsonify({"error": "En feil oppsto med databasen"}), 500
     except Exception as e:
-        print(f"Uventet feil under oppretting av bruker: {e}")
-        return jsonify({"error": "Det oppsto en uventet feil"}), 500
+        print(f"Error: {e}")
+        return jsonify({"error": "Something went wrong"}), 500
     finally:
         cursor.close()
         conn.close()
+
 
 
 @app.route('/quiz/submit', methods=['POST'])

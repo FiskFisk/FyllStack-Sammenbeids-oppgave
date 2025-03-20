@@ -1,6 +1,6 @@
 # config.py
 db_config = {
-    'host': '10.0.0.19',
+    'host': '10.2.4.56',
     'user': 'hvahoot_admin',
     'password': 'julian',
     'database': 'hvahoot'
