@@ -163,5 +163,6 @@ def health():
 def test():
     return jsonify({"message": "Hello from Flask!"})
 
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000) #DETTE GJØR VI IKKE MEN SIDEN JEG VET IKKE GENTLIG???? IFØLGE NOEN SÅ MÅ JEG LA DET VÆRE SÅNN :D
