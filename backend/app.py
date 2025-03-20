@@ -139,11 +139,13 @@ def submit_quiz():
 def get_quiz_results():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
+    
     try:
         query = "SELECT * FROM quizResult"
         cursor.execute(query)
         results = cursor.fetchall()
         return jsonify(results), 200
+    
     except mysql.connector.Error as e:
         print(f"Database error: {e}")
         return jsonify({"error": "Database error occurred WOMP WOMP LAURA"}), 500
