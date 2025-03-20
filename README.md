@@ -1,3 +1,4 @@
+
 # Hvahoot - Quiz Web App
 
 Hvahoot er en quizplattform der brukere kan registrere seg, velge en quiz, svare på spørsmål og sammenligne resultatene sine med andre spillere.
@@ -5,7 +6,7 @@ Hvahoot er en quizplattform der brukere kan registrere seg, velge en quiz, svare
 ## 📌 Teknologi
 - **Frontend**: React (TypeScript, Vite)
 - **Backend**: Flask (Python)
-- **Database**: (Kan legges til senere, f.eks. SQLite/PostgreSQL)
+- **Database**: MariaDB (via Raspberry Pi)
 
 ## 🚀 Kjernefunksjonalitet
 ✅ Brukerregistrering og innlogging  
@@ -115,15 +116,49 @@ Backend kjører nå på `http://127.0.0.1:5000`
 
 ---
 
-## 🔗 API-endepunkter
-- `GET /api/test` - Sjekker om backend fungerer
+## 🔗 Videre utvikling
 
-## 📌 Videre utvikling
-- 🔑 Legge til brukerautentisering
-- 📝 Implementere quizlogikk
-- 🎨 Forbedre UI/UX
+### 3️⃣ Frontend-sider
+Julian jobbet med frontend og opprettet sidene for:
+- Login (med input-felt og styling)
+- Registrering (brukerinformasjon lagres korrekt)
+- Meny (for å velge quizer)
+
+### 4️⃣ Backend-forbindelse og database
+Laura utviklet Flask-backenden videre og koblet den til en Raspberry Pi med MariaDB.
+- Backend kan sende og motta data fra databasen
+- Backend kan lese og skrive JSON-filer for quiz-spørsmål
+
+**Database-strukturen inkluderer:**
+- **Brukere**: Passord, e-post, brukernavn, telefonnummer
+- **Quiz-resultater**: Quiz ID, Brukernavn, Bruker ID, Poeng
+- **Quiz-data** lagres i en JSON-fil
+
+### 5️⃣ Integrasjon mellom frontend og backend
+Julian koblet frontend til backend:
+- Brukere kan registrere seg og logge inn
+- Informasjon sendes mellom frontend og backend korrekt
+- Funksjonaliteten fungerer som forventet
 
 ---
 
-🛠️ **Dette er den første versjonen av dokumentasjonen. Oppdateringer vil bli lagt til etter hvert som prosjektet utvikler seg!** 🚀
+## 🔗 API-endepunkter
+- `GET /api/test` - Sjekker om backend fungerer
+- `POST /api/register` - Registrerer en ny bruker
+- `POST /api/login` - Brukerinnlogging
+- `GET /api/quiz` - Henter quiz-data
+- Flere endepunkter for quiz-svar og poengregistrering er under utvikling
 
+## 📌 Videre utvikling
+- 🔑 Implementere sikker autentisering
+- 📝 Fullføre quizlogikk
+- 🎨 Forbedre UI/UX
+
+## 📌 Hosting-struktur
+- Frontend kjører på port 3000
+- Backend kjører på port 5000
+- Frontend og backend hostes på to forskjellige servere
+
+---
+
+🛠️ **Dette er den oppdaterte dokumentasjonen. Nye oppdateringer vil bli lagt til etter hvert som prosjektet utvikler seg!** 🚀
