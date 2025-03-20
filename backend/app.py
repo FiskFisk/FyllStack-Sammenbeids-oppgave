@@ -10,6 +10,10 @@ app = Flask(__name__)
 app.secret_key = "your_secret_key_here"
 CORS(app, supports_credentials=True)  # Allow cookies (sessions) across requests
 
+# Load the quiz data from the JSON file at startup
+QUIZ_FILE_PATH = os.path.join(os.path.dirname(__file__), 'quizzes.json')
+with open(QUIZ_FILE_PATH, 'r') as f:
+    quiz_data = json.load(f)
 
 def get_db_connection(): # This basically takes the database configuration from config.py and connects to the database YAY!
     return mysql.connector.connect(**db_config)
@@ -70,7 +74,7 @@ def create_user():
 
     try:
         data = request.get_json()
-        print("Received data:", data)  # ✅ Print received data
+        print("Received data:", data)  # Print received data
 
         if not data:
             return jsonify({"error": "Invalid JSON format"}), 400
@@ -109,31 +113,46 @@ def create_user():
         conn.close()
 
 
-
+# Route som le
 @app.route('/quiz/submit', methods=['POST'])
 def submit_quiz():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     try:
         data = request.get_json()
-        # Check if all required fields are provided (som kontrollbilett)
-        if not all(key in data for key in ('brukerID', 'quizIdentifier', 'totalScore')):
-            return jsonify({"error": "Required fields: brukerID, quizIdentifier, totalScore"}), 400
+        # Checks that the info is there
+        if 'quizIdentifier' not in data or 'totalScore' not in data:
+            return jsonify({"error": "quizIdentifier and totalScore are required"}), 400
 
-        brukerID = data['brukerID']
+        # Check if the user is authenticated (broski må være authenticated)
+        brukerID = session.get('brukerID')
+        if not brukerID:
+            return jsonify({"error": "User not authenticated"}), 401
+
+        # Use the quiz name as the identifier
         quizIdentifier = data['quizIdentifier']
         totalScore = data['totalScore']
 
-        # Insert the quiz result into the quizResult table
-        query = "INSERT INTO quizResult (brukerID, quizIdentifier, totalScore) VALUES (%s, %s, %s)"
-        cursor.execute(query, (brukerID, quizIdentifier, totalScore))
+        # Verify that the quiz exists in the JSON data
+        if quizIdentifier not in quiz_data:
+            return jsonify({"error": "Quiz not found"}), 404
+
+        # Insert the quiz result into the database
+        query_insert = """
+            INSERT INTO quizResult (brukerID, quizIdentifier, totalScore)
+            VALUES (%s, %s, %s)
+        """
+        cursor.execute(query_insert, (brukerID, quizIdentifier, totalScore))
         conn.commit()
 
-        return jsonify({"message": "Quiz result submitted successfully, YAYYAY"}), 201
+        return jsonify({"message": "Quiz result submitted successfully"}), 201
 
     except mysql.connector.Error as e:
         print(f"Database error: {e}")
-        return jsonify({"error": "Database error occurred womp womp"}), 500
+        return jsonify({"error": "Database error occurred"}), 500
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return jsonify({"error": "An unexpected error occurred"}), 500
     finally:
         cursor.close()
         conn.close()
@@ -162,6 +181,7 @@ def get_quiz_results():
 def health():
     print("Health endpoint was accessed.")
     return jsonify({"status": "ok"}), 200
+
 
 @app.route("/api/test", methods=["GET"])
 def test():
