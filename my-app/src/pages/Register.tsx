@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./Register.css"; // Import the CSS file
+import { useNavigate, Link } from "react-router-dom";
+import "./Register.css";
 
 const Register: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fullnavn, setFullnavn] = useState("");
+  const [e_post, setEPost] = useState("");
+  const [passord, setPassord] = useState("");
+  const [telefon, setTelefon] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -15,11 +15,25 @@ const Register: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/register", { username, email, password });
-      console.log("Registration successful:", response.data);
-      navigate("/"); // Redirect to login after successful registration
-    } catch (err) {
-      setError("Registration failed. Please try again.");
+      const response = await fetch("http://localhost:5000/create_user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Allows sending cookies for authentication
+        body: JSON.stringify({ fullnavn, e_post, passord, telefon }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Registration failed. Please try again.");
+      }
+
+      const data = await response.json();
+      console.log("Registration successful:", data);
+      navigate("/"); // Redirect to login page
+    } catch (err: any) {
+      setError(err.message);
       console.error("Error registering:", err);
     }
   };
@@ -31,9 +45,9 @@ const Register: React.FC = () => {
         <div>
           <input 
             type="text" 
-            placeholder="Username"
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
+            placeholder="Full Name"
+            value={fullnavn} 
+            onChange={(e) => setFullnavn(e.target.value)} 
             required 
           />
         </div>
@@ -41,8 +55,8 @@ const Register: React.FC = () => {
           <input 
             type="email" 
             placeholder="Email"
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            value={e_post} 
+            onChange={(e) => setEPost(e.target.value)} 
             required 
           />
         </div>
@@ -50,15 +64,26 @@ const Register: React.FC = () => {
           <input 
             type="password" 
             placeholder="Password"
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+            value={passord} 
+            onChange={(e) => setPassord(e.target.value)} 
             required 
           />
         </div>
-        <button type="submit">Register</button>
+        <div>
+          <input 
+            type="text" 
+            placeholder="Phone Number"
+            value={telefon} 
+            onChange={(e) => setTelefon(e.target.value)} 
+            required 
+          />
+        </div>
+        <button type="submit" className="btn">Register</button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <p className="signup-link">Already have an account? <a href="/">Login</a></p>
+      {error && <p className="error-message">{error}</p>}
+      <p className="signup-link">
+        Already have an account? <Link to="/">Login</Link>
+      </p>
     </div>
   );
 };
