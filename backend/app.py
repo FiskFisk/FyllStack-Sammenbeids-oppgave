@@ -8,7 +8,9 @@ from config import db_config
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"  # Needed for sessions
-CORS(app)  # Allows the frontend to communicate with the backend (VERSTE FORKLARING BTW)
+# ✅ Updated CORS configuration to allow requests from localhost:3000
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}}, supports_credentials=True)
+
 
 def get_db_connection(): # This basically takes the database configuration from config.py and connects to the database YAY!
     return mysql.connector.connect(**db_config)
@@ -93,7 +95,7 @@ def create_user():
         cursor.execute(query, values)
         conn.commit()
 
-        return jsonify({"message": "Brukeren ble opprettet!", "redirect": "/route til log in LOL"}), 201
+        return jsonify({"message": "Brukeren ble opprettet!", "redirect": "/"}), 201
 
     except mysql.connector.Error as e:
         print(f"Databasefeil under oppretting av bruker: {e}")
@@ -156,8 +158,6 @@ def get_quiz_results():
 def health():
     print("Health endpoint was accessed.")
     return jsonify({"status": "ok"}), 200
-
-
 
 @app.route("/api/test", methods=["GET"])
 def test():

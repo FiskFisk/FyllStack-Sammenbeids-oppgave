@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import './Login.css'; // Import the CSS file
+import "./Login.css";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [e_post, setEPost] = useState("");
+  const [passord, setPassord] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -14,11 +14,16 @@ const Login: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/login", { email, password });
+      const response = await axios.post(
+        "http://localhost:5000/login",
+        { e_post, passord },
+        { withCredentials: true } // 🔥 Allows session cookies for authentication
+      );
+
       console.log("Login successful:", response.data);
-      navigate("/main-menu"); // Redirect to main menu after successful login
-    } catch (err) {
-      setError("Login failed. Please check your credentials.");
+      navigate(response.data.redirect || "/main-menu"); // 🔥 Fallback redirect
+    } catch (err: any) {
+      setError(err.response?.data?.error || "Login failed. Please check your credentials.");
       console.error("Error logging in:", err);
     }
   };
@@ -31,8 +36,8 @@ const Login: React.FC = () => {
           <label>Email:</label>
           <input 
             type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            value={e_post} 
+            onChange={(e) => setEPost(e.target.value)} 
             required 
           />
         </div>
@@ -40,17 +45,17 @@ const Login: React.FC = () => {
           <label>Password:</label>
           <input 
             type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+            value={passord} 
+            onChange={(e) => setPassord(e.target.value)} 
             required 
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="btn">Login</button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div className="signup-redirect">
-        <p>Don't have an account? <a href="/register" className="signup-link">Register</a></p>
-      </div>
+      {error && <p className="error-message">{error}</p>}
+      <p className="signup-redirect">
+        Don't have an account? <Link to="/register" className="signup-link">Register</Link>
+      </p>
     </div>
   );
 };
