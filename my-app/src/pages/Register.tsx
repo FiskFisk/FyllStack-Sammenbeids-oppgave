@@ -15,14 +15,15 @@ const Register: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:5000/create_user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // Allows sending cookies for authentication
-        body: JSON.stringify({ fullnavn, e_post, passord, telefon }),
-      });
+ const response = await fetch("/create_user", { // Change to relative path
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ fullnavn, e_post, passord, telefon }),
+});
+
 
       if (!response.ok) {
         const errorData = await response.json();
