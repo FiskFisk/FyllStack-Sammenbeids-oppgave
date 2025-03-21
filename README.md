@@ -3,7 +3,7 @@
 
 Hvahoot er en quizplattform der brukere kan registrere seg, velge en quiz, svare på spørsmål og sammenligne resultatene sine med andre spillere.
 
-## 📌 Teknologi
+## 📌 Teknologi 
 - **Frontend**: React (TypeScript, Vite)
 - **Backend**: Flask (Python)
 - **Database**: MariaDB (via Raspberry Pi)
@@ -152,7 +152,7 @@ Laura utviklet Flask-backenden videre og koblet den til en Raspberry Pi med Mari
 - **Quiz-data** lagres i en JSON-fil
 
 ### 5️⃣ Integrasjon mellom frontend og backend
-Julian koblet frontend til backend:
+ Koblet frontend til backend:
 - Brukere kan registrere seg og logge inn
 - Informasjon sendes mellom frontend og backend korrekt
 - Funksjonaliteten fungerer som forventet
@@ -170,11 +170,12 @@ Julian koblet frontend til backend:
 - 🔑 Implementere sikker autentisering
 - 📝 Fullføre quizlogikk
 - 🎨 Forbedre UI/UX
+-  👔 Muligheten for å logge seg som admin
 
 ## 📌 Hosting-struktur
 - Frontend kjører på port 3000
 - Backend kjører på port 5000
-- Frontend og backend hostes på to forskjellige servere
+- Frontend og backend hostes på to forskjellige serverer
 
 ---
 
