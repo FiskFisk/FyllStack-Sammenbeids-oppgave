@@ -4,8 +4,8 @@ import axios from "axios";
 import "./Login.css";
 
 const Login: React.FC = () => {
-  const [e_post, setEPost] = useState("");
-  const [passord, setPassord] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -16,46 +16,56 @@ const Login: React.FC = () => {
     try {
       const response = await axios.post(
         "http://localhost:5000/login",
-        { e_post, passord },
-        { withCredentials: true } // 🔥 Allows session cookies for authentication
+        { e_post: email.trim(), passord: password.trim() },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
       );
 
       console.log("Login successful:", response.data);
-      navigate(response.data.redirect || "/main-menu"); // 🔥 Fallback redirect
+      navigate(response.data.redirect || "/main-menu");
     } catch (err: any) {
-      setError(err.response?.data?.error || "Login failed. Please check your credentials.");
       console.error("Error logging in:", err);
+      setError(err.response?.data?.error || "Login failed. Please check your credentials.");
     }
   };
 
   return (
     <div className="login-container">
-      <h1>Login</h1>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
-          <input 
-            type="email" 
-            value={e_post} 
-            onChange={(e) => setEPost(e.target.value)} 
-            required 
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
+
         <div>
-          <label>Password:</label>
-          <input 
-            type="password" 
-            value={passord} 
-            onChange={(e) => setPassord(e.target.value)} 
-            required 
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
+
         <button type="submit" className="btn">Login</button>
       </form>
+
       {error && <p className="error-message">{error}</p>}
-      <p className="signup-redirect">
-        Don't have an account? <Link to="/register" className="signup-link">Register</Link>
-      </p>
+
+      <div style={{ display: "flex", flexDirection: "row", gap: "8px", justifyContent: "center" }}>
+        <p>Don't have an account?</p>
+        <p className="signup-link">
+          <Link to="/register">Register</Link>
+        </p>
+      </div>
     </div>
   );
 };

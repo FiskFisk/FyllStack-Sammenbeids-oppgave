@@ -2,6 +2,7 @@
     "quizzes": [
       {
         "name": "Animal Quiz",
+        "Category": "Animals",
         "questions": [
           {
             "question_text": "What is the fastest land animal?",
@@ -22,6 +23,7 @@
       },
       {
         "name": "Food Quiz",
+        "Category": "Food",
         "questions": [
           {
             "question_text": "Which fruit is known for having its seeds on the outside?",

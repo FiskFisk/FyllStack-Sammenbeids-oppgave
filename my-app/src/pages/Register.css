@@ -6,6 +6,8 @@
     --hvit: #ffff;
     --blue-light:#abc4d3;
     --light-gray:#f2f2f2;
+    --green: #4CAF50;
+    --light-green: #64b866;
 }
 
 body {
@@ -31,7 +33,7 @@ body {
 .signup-container h2 {
     font-size: 1.8rem; /* Matches the heading size of the log-in page */
     margin-bottom: 20px;
-    color: var(--light-pink); /* Same pink color for headings */
+    color: var(--green); /* Changed to green */
 }
 
 .signup-container input {
@@ -45,7 +47,7 @@ body {
 }
 
 .signup-container button {
-    background-color: var(--light-blue); /* Matches log-in button color */
+    background-color: var(--green); /* Changed to green */
     color: var(--hvit); /* White text on the button */
     padding: 10px 20px;
     border: none;
@@ -55,17 +57,25 @@ body {
 }
 
 .signup-container button:hover {
-    background-color: var(--light-pink); /* Hover effect matches log-in button */
+    background-color: var(--light-green); /* Hover effect matches log-in button */
 }
 
 .signup-link {
     display: block;
-    margin-top: 20px;
+    margin-top: 10px;
     color: var(--light-blue); /* Matches the log-in sign-up link color */
     text-decoration: none;
+    font-size: 20px;
 }
 
 .signup-link:hover {
     color: var(--light-pink); /* Matches hover effect for links on log-in page */
+}
+
+.signup-link a {
+    text-decoration: none;
+}
+
+.signup-link a:hover {
     text-decoration: underline;
 }

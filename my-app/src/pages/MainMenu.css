@@ -1,0 +1,206 @@
+:root {
+    --green: #4CAF50;
+    --white: #ffffff;
+    --gray: #f2f2f2;
+    --black: #333;
+    --orange: #FF9800;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--orange) !important;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.main-menu {
+    background: transparent !important; /* Remove unwanted white background */
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--gray);
+    min-height: 100vh;
+    width: 100vw;
+}
+
+/* Header */
+.header {
+    display: flex; /* Added this line */
+    align-items: center; /* Align items vertically */
+    font-size: 2rem;
+    font-weight: bold;
+    background: var(--white);
+    color: var(--black);
+    width: 100%;
+    padding: 15px 0;
+}
+
+/* Content Wrapper */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Logo Box */
+.logo-box {
+    width: 200px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 100%;
+    height: 50px;
+    background-image: url(../../public/HvaHoot_logo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Banner */
+.banner {
+    width: 100%;
+    height: 300px;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Keep this for left/right alignment */
+    margin-bottom: 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjusted padding to bring items closer to the center but not fully centered */
+.quiz-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+.play-btn {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    padding: 30px 70px;
+    font-size: 4rem;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-right: 10%;
+}
+
+.play-btn:hover {
+    background: #3a8b40;
+}
+
+/* Categories */
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Reduced gap for better spacing */
+    margin-bottom: 30px;
+}
+
+.category-circle {
+    width: 120px;
+    height: 120px;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex; /* Center text inside */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    font-size: 1rem; /* Font size for category name */
+}
+
+/* Quiz Sections */
+.quiz-section {
+    width: 100%;
+    padding: 0 20px; /* Add padding for left/right alignment */
+}
+
+.quiz-boxes {
+    display: flex;
+    justify-content: center; /* Center quiz boxes */
+    gap: 20px; /* Space between quiz boxes */
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    margin-bottom: 30px; /* Space below each category */
+}
+
+/* Quiz Boxes */
+.quiz-box {
+    background: var(--green);
+    color: var(--white);
+    width: 300px; /* Set width */
+    height: 200px; /* Set height */
+    display: flex; /* Align content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    font-size: 1.5rem; /* Font size for quiz name */
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Logout Button */
+.logout-btn {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #222;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    height: 175px;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 100px; /* Rounded top left corner */
+    border-top-right-radius: 100px; /* Rounded top right corner */
+    margin-top: auto; /* Push footer to the bottom */
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1)
+}
+
+.footer-logo-box {
+    width: 150px;
+    height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4%;
+}
+
+.footer-logo {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../public/HvaHoot_logo.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.footer p {
+    margin-left: 20px; /* Space between logo and text */
+    font-size: 1rem; /* Font size for footer text */
+    color: var(--black);
+}
