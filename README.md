@@ -143,6 +143,8 @@ Julian jobbet med frontend og opprettet sidene for:
 
 ### 4️⃣ Backend-forbindelse og database
 Laura utviklet Flask-backenden videre og koblet den til en Raspberry Pi med MariaDB.
+
+-laget Databasen 
 - Backend kan sende og motta data fra databasen for login og registrering
 - Backend kan lese og skrive JSON-filer for quiz-spørsmål
 
