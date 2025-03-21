@@ -73,25 +73,43 @@ export default App;
 Opprett en `backend`-mappe og kjør følgende kommandoer:
 ```sh
 cd backend
+```
+```sh
 python -m venv venv
 ```
 
 🔹 **For Windows**:
 ```sh
-venv\Scripts\activate
+.\venv\Scripts\activate
 ```
 
 🔹 **For Mac/Linux**:
 ```sh
 source venv/bin/activate
 ```
-
-Installer nødvendige pakker:
+---
+Installer alle nødvendige biblioteker 
+Sørg for at du har en fil kalt ```requirements.txt``` i prosjektmappen. 
+Installer biblioteker med kommandoen:
+```sh
+pip install -r requirements.txt
+```
+Hvis filen requirements.txt mangler, kan du installere de viktigste manuelt:
+```sh
+pip install flask mysql-connector
+```
+```sh
+pip install flask
+````
 ```sh
 pip install flask flask-cors
 ```
+```sh
+pip install bcrypt
+```
 
-Opprett en `app.py` med følgende innhold:
+Opprett en `app.py` fil som skal inneholde koden for å kjøre backend-serveren. Bruk følgende innhold:
+
 ```python
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -104,10 +122,9 @@ def test():
     return jsonify({"message": "Hello from Flask!"})
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000) #Du kan bruke den host for ut
 ```
-
-🚀 Start backend-serveren:
+🚀 Deretter i Terminalen gå til mappen der ```app.py``` ligger og start backend:
 ```sh
 python app.py
 ```
@@ -120,18 +137,18 @@ Backend kjører nå på `http://127.0.0.1:5000`
 
 ### 3️⃣ Frontend-sider
 Julian jobbet med frontend og opprettet sidene for:
-- Login (med input-felt og styling)
+- Login (med input-felt og styling, credits til Laura for styling)
 - Registrering (brukerinformasjon lagres korrekt)
 - Meny (for å velge quizer)
 
 ### 4️⃣ Backend-forbindelse og database
 Laura utviklet Flask-backenden videre og koblet den til en Raspberry Pi med MariaDB.
-- Backend kan sende og motta data fra databasen
+- Backend kan sende og motta data fra databasen for login og registrering
 - Backend kan lese og skrive JSON-filer for quiz-spørsmål
 
 **Database-strukturen inkluderer:**
 - **Brukere**: Passord, e-post, brukernavn, telefonnummer
-- **Quiz-resultater**: Quiz ID, Brukernavn, Bruker ID, Poeng
+- **Quiz-resultater**: Quiz ID, Brukernavn, Bruker ID, Total poengsum
 - **Quiz-data** lagres i en JSON-fil
 
 ### 5️⃣ Integrasjon mellom frontend og backend
