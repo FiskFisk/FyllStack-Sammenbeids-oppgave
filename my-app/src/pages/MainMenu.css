@@ -85,18 +85,23 @@ html, body {
 }
 
 .play-btn {
-    background: var(--green);
-    color: var(--white);
-    border: none;
-    padding: 30px 70px;
-    font-size: 4rem;
-    border-radius: 100px;
-    cursor: pointer;
-    margin-right: 10%;
+    background: var(--green); /* Use the green color variable */
+    color: var(--white); /* Text color */
+    border: none; /* Remove border */
+    padding: 20px 40px; /* Adjust padding for size */
+    font-size: 2rem; /* Font size */
+    border-radius: 30px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+    margin-left: 5%; /* Align to the left */
 }
 
 .play-btn:hover {
-    background: #3a8b40;
+    background: #3a8b40; /* Darker green on hover */
+}
+
+.play-btn:active {
+    background: #2a6b30; /* Even darker shade when active */
 }
 
 /* Categories */
@@ -179,7 +184,7 @@ html, body {
     border-top-left-radius: 100px; /* Rounded top left corner */
     border-top-right-radius: 100px; /* Rounded top right corner */
     margin-top: auto; /* Push footer to the bottom */
-    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1)
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .footer-logo-box {

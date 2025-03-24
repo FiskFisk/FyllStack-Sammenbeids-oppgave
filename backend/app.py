@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, send_from_directory
 import mysql.connector
 import json
 import os
@@ -12,17 +12,21 @@ CORS(app, supports_credentials=True)  # Allow cookies (sessions) across requests
 
 # Load the quiz data from the JSON file at startup
 QUIZ_FILE_PATH = os.path.join(os.path.dirname(__file__), 'quizzes.json')
+
+# Add this route to serve quizzes.json from the backend folder
+@app.route('/quizzes.json', methods=['GET'])
+def get_quiz():
+    return send_from_directory(os.path.dirname(__file__), 'quizzes.json')
+
 with open(QUIZ_FILE_PATH, 'r') as f:
     quiz_data = json.load(f)
 
-def get_db_connection(): # This basically takes the database configuration from config.py and connects to the database YAY!
+def get_db_connection():  # This basically takes the database configuration from config.py and connects to the database YAY!
     return mysql.connector.connect(**db_config)
-
 
 # Route for login
 @app.route('/login', methods=['POST'])
 def login():
-    # Create a new connection and cursor for this request is the samen on every route
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     try:
@@ -41,7 +45,7 @@ def login():
             # Verify the password using bcrypt
             if bcrypt.checkpw(passord.encode('utf-8'), user['passord'].encode('utf-8')):
                 session['brukerID'] = user['brukerID']
-                return jsonify({"message": "Klarte å logge inn YAY!", "redirect": "/route til main side i guess"}), 200
+                return jsonify({"message": "Klarte å logge inn YAY!", "redirect": "/main-menu"}), 200  # Update redirect path
             else:
                 return jsonify({"error": "Feil passord."}), 401
         else:
@@ -62,7 +66,6 @@ def login():
 def logout():
     session.clear()  # Clear all session data
     return jsonify({"message": "Logged out successfully YAYAYAY!"}), 200
-
 
 # Route for creating a new user
 @app.route('/create_user', methods=['POST'])
@@ -112,7 +115,6 @@ def create_user():
         cursor.close()
         conn.close()
 
-
 # Route som le
 @app.route('/quiz/submit', methods=['POST'])
 def submit_quiz():
@@ -157,7 +159,6 @@ def submit_quiz():
         cursor.close()
         conn.close()
 
-
 @app.route('/quiz/results', methods=['GET'])
 def get_quiz_results():
     conn = get_db_connection()
@@ -182,11 +183,9 @@ def health():
     print("Health endpoint was accessed.")
     return jsonify({"status": "ok"}), 200
 
-
 @app.route("/api/test", methods=["GET"])
 def test():
     return jsonify({"message": "Hello from Flask!"})
 
-
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000) #DETTE GJØR VI IKKE MEN SIDEN JEG VET IKKE GENTLIG???? IFØLGE NOEN SÅ MÅ JEG LA DET VÆRE SÅNN :D
+    app.run(debug=True, host='0.0.0.0', port=5000)  # Run the Flask app

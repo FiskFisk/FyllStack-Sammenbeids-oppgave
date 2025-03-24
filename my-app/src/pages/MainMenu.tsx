@@ -1,10 +1,29 @@
-import React from "react";
+// src/pages/MainMenu.tsx
+
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./MainMenu.css";
 
+interface Question {
+  question_text: string;
+  options: string[];
+  correct_answer: string;
+}
+
+interface Quiz {
+  name: string;
+  Category: string; // Changed to match your JSON structure
+  questions: Question[];
+}
+
+interface Quizzes {
+  quizzes: Quiz[];
+}
+
 const MainMenu: React.FC = () => {
   const navigate = useNavigate();
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
 
   const handleLogout = async () => {
     try {
@@ -14,6 +33,32 @@ const MainMenu: React.FC = () => {
       console.error("Error logging out:", error);
     }
   };
+
+  const handlePlayQuiz = (quizName: string) => {
+    navigate(`/quiz/${quizName}`); // Navigate to the selected quiz
+  };
+
+  useEffect(() => {
+    const fetchQuizzes = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/quizzes.json");
+        setQuizzes(response.data.quizzes);
+      } catch (error) {
+        console.error("Error fetching quiz data:", error);
+      }
+    };
+
+    fetchQuizzes();
+  }, []);
+
+  // Group quizzes by category
+  const categories = quizzes.reduce((acc: { [key: string]: Quiz[] }, quiz) => {
+    if (!acc[quiz.Category]) {
+      acc[quiz.Category] = [];
+    }
+    acc[quiz.Category].push(quiz);
+    return acc;
+  }, {});
 
   return (
     <div className="main-menu">
@@ -28,43 +73,37 @@ const MainMenu: React.FC = () => {
         {/* Banner Section */}
         <div className="banner">
           <h1 className="quiz-title">Quiz</h1>
-          <button className="play-btn">Play</button>
+          <button className="play-btn" onClick={() => handlePlayQuiz("Animal Quiz")}>Play</button>
         </div>
 
         {/* Categories */}
         <h2 className="section-title">CATEGORIES</h2>
         <div className="categories">
-          <div className="category-circle">Category 1</div>
-          <div className="category-circle">Category 2</div>
-          <div className="category-circle">Category 3</div>
-          <div className="category-circle">Category 4</div>
+          {Object.keys(categories).map(category => (
+            <div key={category} className="category-circle">
+              {category}
+            </div>
+          ))}
         </div>
 
         {/* Quiz Sections */}
         <div className="quiz-section">
-          <h2 className="section-title">CATEGORY 1</h2>
-          <div className="quiz-boxes">
-            <div className="quiz-box">Quiz 1</div>
-            <div className="quiz-box">Quiz 2</div>
-            <div className="quiz-box">Quiz 3</div>
-            <div className="quiz-box">Quiz 4</div>
-          </div>
-
-          <h2 className="section-title">CATEGORY 2</h2>
-          <div className="quiz-boxes">
-            <div className="quiz-box">Quiz 5</div>
-            <div className="quiz-box">Quiz 6</div>
-            <div className="quiz-box">Quiz 7</div>
-            <div className="quiz-box">Quiz 8</div>
-          </div>
-
-          <h2 className="section-title">CATEGORY 3</h2>
-          <div className="quiz-boxes">
-            <div className="quiz-box">Quiz 9</div>
-            <div className="quiz-box">Quiz 10</div>
-            <div className="quiz-box">Quiz 11</div>
-            <div className="quiz-box">Quiz 12</div>
-          </div>
+          {Object.entries(categories).map(([categoryName, quizzes]) => (
+            <div key={categoryName}>
+              <h2 className="section-title">{categoryName}</h2>
+              <div className="quiz-boxes">
+                {quizzes.map((quiz) => (
+                  <div
+                    key={quiz.name}
+                    className="quiz-box"
+                    onClick={() => handlePlayQuiz(quiz.name)}
+                  >
+                    {quiz.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Logout Button */}

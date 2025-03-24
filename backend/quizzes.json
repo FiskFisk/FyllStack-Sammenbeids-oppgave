@@ -1,0 +1,296 @@
+{
+  "quizzes": [
+    {
+      "name": "Animal Quiz",
+      "Category": "Animals",
+      "questions": [
+        {
+          "question_text": "What is the fastest land animal?",
+          "options": ["Cheetah", "Lion", "Horse", "Kangaroo"],
+          "correct_answer": "Cheetah"
+        },
+        {
+          "question_text": "Which animal is known as the king of the jungle?",
+          "options": ["Elephant", "Tiger", "Lion", "Gorilla"],
+          "correct_answer": "Lion"
+        },
+        {
+          "question_text": "How many legs does a spider have?",
+          "options": ["6", "8", "10", "12"],
+          "correct_answer": "8"
+        },
+        {
+          "question_text": "What animal is known for its ability to change color?",
+          "options": ["Chameleon", "Octopus", "Squid", "Lizard"],
+          "correct_answer": "Chameleon"
+        }
+      ]
+    },
+    {
+      "name": "Wildlife Quiz",
+      "Category": "Animals",
+      "questions": [
+        {
+          "question_text": "What is the largest mammal in the world?",
+          "options": ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+          "correct_answer": "Blue Whale"
+        },
+        {
+          "question_text": "Which bird is known for its colorful plumage?",
+          "options": ["Parrot", "Sparrow", "Eagle", "Pigeon"],
+          "correct_answer": "Parrot"
+        },
+        {
+          "question_text": "What is the largest species of shark?",
+          "options": ["Great White Shark", "Hammerhead Shark", "Whale Shark", "Tiger Shark"],
+          "correct_answer": "Whale Shark"
+        },
+        {
+          "question_text": "Which animal is known for its trunk?",
+          "options": ["Giraffe", "Elephant", "Rhino", "Hippo"],
+          "correct_answer": "Elephant"
+        }
+      ]
+    },
+    {
+      "name": "Aquatic Animals Quiz",
+      "Category": "Animals",
+      "questions": [
+        {
+          "question_text": "What type of animal is a clownfish?",
+          "options": ["Mammal", "Reptile", "Bird", "Fish"],
+          "correct_answer": "Fish"
+        },
+        {
+          "question_text": "Which animal is known as a sea cow?",
+          "options": ["Dolphin", "Manatee", "Sea Lion", "Walrus"],
+          "correct_answer": "Manatee"
+        },
+        {
+          "question_text": "What is the largest species of fish?",
+          "options": ["Great White Shark", "Blue Whale", "Whale Shark", "Tuna"],
+          "correct_answer": "Whale Shark"
+        },
+        {
+          "question_text": "What creature has three hearts?",
+          "options": ["Octopus", "Shark", "Jellyfish", "Starfish"],
+          "correct_answer": "Octopus"
+        }
+      ]
+    },
+    {
+      "name": "Endangered Species Quiz",
+      "Category": "Animals",
+      "questions": [
+        {
+          "question_text": "Which of these is a critically endangered species?",
+          "options": ["Giant Panda", "Snow Leopard", "Blue Whale", "Sumatran Tiger"],
+          "correct_answer": "Sumatran Tiger"
+        },
+        {
+          "question_text": "What is the main threat to the orangutan?",
+          "options": ["Poaching", "Deforestation", "Climate Change", "Pollution"],
+          "correct_answer": "Deforestation"
+        },
+        {
+          "question_text": "Which bird is endangered due to habitat loss?",
+          "options": ["Bald Eagle", "California Condor", "Sparrow", "Robin"],
+          "correct_answer": "California Condor"
+        },
+        {
+          "question_text": "What is the main cause of extinction for many species?",
+          "options": ["Natural disasters", "Human activity", "Climate change", "Disease"],
+          "correct_answer": "Human activity"
+        }
+      ]
+    },
+    {
+      "name": "Food Quiz",
+      "Category": "Food",
+      "questions": [
+        {
+          "question_text": "Which fruit is known for having its seeds on the outside?",
+          "options": ["Apple", "Strawberry", "Banana", "Cherry"],
+          "correct_answer": "Strawberry"
+        },
+        {
+          "question_text": "What is the main ingredient in guacamole?",
+          "options": ["Tomato", "Avocado", "Cucumber", "Lettuce"],
+          "correct_answer": "Avocado"
+        },
+        {
+          "question_text": "Which country is famous for sushi?",
+          "options": ["China", "Korea", "Japan", "Vietnam"],
+          "correct_answer": "Japan"
+        },
+        {
+          "question_text": "What is the most popular spice in the world?",
+          "options": ["Salt", "Pepper", "Cinnamon", "Cumin"],
+          "correct_answer": "Pepper"
+        }
+      ]
+    },
+    {
+      "name": "Desserts Quiz",
+      "Category": "Food",
+      "questions": [
+        {
+          "question_text": "What is the main ingredient in chocolate?",
+          "options": ["Cocoa Beans", "Sugar", "Milk", "Vanilla"],
+          "correct_answer": "Cocoa Beans"
+        },
+        {
+          "question_text": "Which dessert is made with layers of pastry and cream?",
+          "options": ["Tiramisu", "Pavlova", "Baklava", "Eclair"],
+          "correct_answer": "Eclair"
+        },
+        {
+          "question_text": "What is the traditional cake served on birthdays?",
+          "options": ["Cheesecake", "Chocolate Cake", "Fruit Cake", "Pound Cake"],
+          "correct_answer": "Chocolate Cake"
+        },
+        {
+          "question_text": "What is the primary ingredient in meringue?",
+          "options": ["Egg Whites", "Flour", "Sugar", "Butter"],
+          "correct_answer": "Egg Whites"
+        }
+      ]
+    },
+    {
+      "name": "Vegetables Quiz",
+      "Category": "Food",
+      "questions": [
+        {
+          "question_text": "Which vegetable is known for its high vitamin C content?",
+          "options": ["Carrot", "Broccoli", "Potato", "Spinach"],
+          "correct_answer": "Broccoli"
+        },
+        {
+          "question_text": "What vegetable is used to make pickles?",
+          "options": ["Carrot", "Cucumber", "Pepper", "Radish"],
+          "correct_answer": "Cucumber"
+        },
+        {
+          "question_text": "Which vegetable is a staple in Italian cuisine?",
+          "options": ["Tomato", "Onion", "Garlic", "Zucchini"],
+          "correct_answer": "Tomato"
+        },
+        {
+          "question_text": "What is the most widely consumed vegetable in the world?",
+          "options": ["Potato", "Tomato", "Carrot", "Onion"],
+          "correct_answer": "Potato"
+        }
+      ]
+    },
+    {
+      "name": "Cooking Techniques Quiz",
+      "Category": "Food",
+      "questions": [
+        {
+          "question_text": "What is the technique of cooking food in water or broth at a low temperature?",
+          "options": ["Boiling", "Steaming", "Poaching", "Frying"],
+          "correct_answer": "Poaching"
+        },
+        {
+          "question_text": "What is the process of cooking food in a small amount of oil over high heat called?",
+          "options": ["Sauteing", "Frying", "Grilling", "Roasting"],
+          "correct_answer": "Sauteing"
+        },
+        {
+          "question_text": "Which cooking method uses dry heat in an oven?",
+          "options": ["Boiling", "Baking", "Steaming", "Poaching"],
+          "correct_answer": "Baking"
+        },
+        {
+          "question_text": "What cooking technique involves marinating food before grilling?",
+          "options": ["Basting", "Brining", "Glazing", "Searing"],
+          "correct_answer": "Marinating"
+        }
+      ]
+    },
+    {
+      "name": "Countries Quiz",
+      "Category": "Countries",
+      "questions": [
+        {
+          "question_text": "Which country is known as the Land of the Rising Sun?",
+          "options": ["China", "Japan", "Thailand", "Vietnam"],
+          "correct_answer": "Japan"
+        },
+        {
+          "question_text": "Which country has the largest population?",
+          "options": ["India", "United States", "China", "Brazil"],
+          "correct_answer": "China"
+        },
+        {
+          "question_text": "What is the capital city of France?",
+          "options": ["Berlin", "Madrid", "Rome", "Paris"],
+          "correct_answer": "Paris"
+        }
+      ]
+    },
+    {
+      "name": "European Countries Quiz",
+      "Category": "Countries",
+      "questions": [
+        {
+          "question_text": "Which country is famous for its fjords?",
+          "options": ["Sweden", "Finland", "Norway", "Denmark"],
+          "correct_answer": "Norway"
+        },
+        {
+          "question_text": "What is the currency of the United Kingdom?",
+          "options": ["Euro", "Pound Sterling", "Dollar", "Franc"],
+          "correct_answer": "Pound Sterling"
+        },
+        {
+          "question_text": "Which city is known as the capital of Italy?",
+          "options": ["Rome", "Venice", "Florence", "Milan"],
+          "correct_answer": "Rome"
+        }
+      ]
+    },
+    {
+      "name": "African Countries Quiz",
+      "Category": "Countries",
+      "questions": [
+        {
+          "question_text": "Which country is known for its pyramids?",
+          "options": ["Egypt", "Sudan", "Nigeria", "Kenya"],
+          "correct_answer": "Egypt"
+        },
+        {
+          "question_text": "What is the largest country in Africa?",
+          "options": ["Algeria", "Nigeria", "South Africa", "Kenya"],
+          "correct_answer": "Algeria"
+        },
+        {
+          "question_text": "Which country is famous for the Maasai Mara National Reserve?",
+          "options": ["Uganda", "Kenya", "Tanzania", "Rwanda"],
+          "correct_answer": "Kenya"
+        }
+      ]
+    },
+    {
+      "name": "Asian Countries Quiz",
+      "Category": "Countries",
+      "questions": [
+        {
+          "question_text": "Which country is known for its Great Wall?",
+          "options": ["Japan", "China", "India", "Mongolia"],
+          "correct_answer": "China"
+        },
+        {
+          "question_text": "What is the capital of Thailand?",
+          "options": ["Bangkok", "Hanoi", "Kuala Lumpur", "Jakarta"],
+          "correct_answer": "Bangkok"
+        },
+        {
+          "question_text": "Which country is famous for its Bollywood film industry?",
+          "options": ["Pakistan", "Bangladesh", "India", "Sri Lanka"],
+          "correct_answer": "India"
+        }
+      ]
+    }
+  ]
+}
