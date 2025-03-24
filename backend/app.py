@@ -192,11 +192,6 @@ def submit_quiz():
         cursor.close()
         conn.close()
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> bd89d0aed644384efb437b50d1294ab02aa0d23e
 @app.route('/quiz/results', methods=['GET'])
 def get_quiz_results():
     conn = get_db_connection()
@@ -214,6 +209,7 @@ def get_quiz_results():
     finally:
         cursor.close()
         conn.close()
+        
 
 #MY SHAYLAAAAAAAAAAAAAA, just takes checks that everything is working, because anxiety 😔
 @app.route('/health', methods=['GET'])
