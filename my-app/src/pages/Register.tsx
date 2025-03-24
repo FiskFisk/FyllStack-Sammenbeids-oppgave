@@ -95,9 +95,12 @@ const Register: React.FC = () => {
         </button>
       </form>
       {error && <p className="error-message">{error}</p>}
-      <p className="signup-link">
-        Already have an account? <Link to="/">Login</Link>
-      </p>
+      <div style={{ display: "flex", flexDirection: "row", gap: "8px", justifyContent: "center" }}>
+        <p>Already have an account?</p>
+        <p className="signup-link">
+          <Link to="/">Login</Link>
+        </p>
+      </div>
     </div>
   );
 };

@@ -1,39 +1,20 @@
-/* Sign up button styles */
-.signup-redirect {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#signup-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#signup-btn:hover {
-    background-color: var(--rose-quartz);
-}
-
-/* Login page body styles */
 :root {
-
     --light-pink: #FFB6C1;
     --light-blue: #1b9ce2;
+    --orange: #FF9800;
     --rose-quartz: #F7CAC9;
     --hvit: #ffff;
     --blue-light:#abc4d3;
     --light-gray:#f2f2f2;
+    --green: #4CAF50;
+    --light-green: #64b866;
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: var(--blue-light); /* Adjust the color as per your design */
+    background: var(--orange); /* Matches the register page */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,30 +22,32 @@ body {
 }
 
 .login-container {
-    background: var(--hvit);
+    background: var(--hvit); /* Same white container background */
     padding: 50px;
-    border-radius: 10px;
+    border-radius: 50px; /* Same rounded corners */
     text-align: center;
-    width: 500px;
+    width: 500px; /* Matches the register container width */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.login-container h1 {
-    font-size: 1.8rem;
+.login-container h2 {
+    font-size: 1.8rem; /* Matches register page heading size */
     margin-bottom: 20px;
-    color: var(--light-pink);
+    color: var(--green); /* Matches register page heading color */
 }
 
 .login-container input {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
     font-size: 1rem;
+    border: solid 1px black;
 }
 
 .login-container button {
-    background-color: var(--light-blue);
+    background-color: var(--green); /* Matches register button color */
     color: var(--hvit);
     padding: 10px 20px;
     border: none;
@@ -74,17 +57,19 @@ body {
 }
 
 .login-container button:hover {
-    background-color: var(--light-pink);
+    background-color: var(--light-green); /* Matches register button hover effect */
 }
 
-.signup-link {
-    display: block;
-    margin-top: 20px;
-    color: var(--light-blue);
+.signup-redirect {
+    margin-top: 10px;
+    color: var(--light-blue); /* Matches register page link color */
+    font-size: 20px;
+}
+
+.signup-redirect a {
     text-decoration: none;
 }
 
-.signup-link:hover {
-    color: var(--light-pink);
-    text-decoration: underline;
+.signup-redirect a:hover {
+    text-decoration: underline; /* Only "Register" gets underlined */
 }

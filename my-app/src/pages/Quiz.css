@@ -1,0 +1,110 @@
+/* src/pages/Quiz.css */
+
+.quiz {
+    padding: 30px; /* Increased padding */
+    background-color: white; /* Set background color to white */
+}
+
+.image-container {
+    background-color: white; /* White background for the image box */
+    height: 250px; /* Increased height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0; /* Space above and below the image */
+    border: 1px solid #ccc; /* Optional: border around the image box */
+}
+
+.quiz-image {
+    max-width: 100%; /* Ensure image fits within the container */
+    max-height: 100%; /* Ensure image fits within the container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.timer {
+    font-size: 1.5rem; /* Font size for the timer */
+    margin: 10px 0; /* Space around the timer */
+    text-align: center; /* Center the timer text */
+}
+
+.options {
+    margin: 20px 0;
+}
+
+.answer-row {
+    display: flex;
+    justify-content: space-between; /* Space buttons evenly */
+}
+
+.quiz-button {
+    margin: 10px; /* Increased margin */
+    flex: 1; /* Allow buttons to take equal space */
+    color: var(--white); /* White text */
+    border: none; /* Remove border */
+    padding: 15px; /* Increased padding */
+    font-size: 1.5rem; /* Increased font size */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.top-left {
+    background-color: var(--orange); /* Orange background */
+}
+
+.top-right {
+    background-color: var(--green); /* Green background */
+}
+
+.bottom-left {
+    background-color: var(--green); /* Green background */
+}
+
+.bottom-right {
+    background-color: var(--orange); /* Orange background */
+}
+
+.quiz-button:hover {
+    opacity: 0.8; /* Slightly fade on hover */
+}
+
+
+.next-button {
+    margin-top: 20px; /* Space above the Next Question button */
+    float: right; /* Align to the right */
+    background-color: var(--green); /* Green background for the next button */
+    color: var(--white); /* White text */
+    border: none; /* Remove border */
+    padding: 15px; /* Increased padding */
+    font-size: 1.5rem; /* Increased font size */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* src/pages/Quiz.css */
+
+.scoreboard {
+    margin-top: 20px; /* Space above the scoreboard */
+    background-color: var(--white); /* White background for the scoreboard */
+    padding: 20px; /* Padding for the scoreboard */
+    border: 1px solid #ccc; /* Optional: border around the scoreboard */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+
+.scoreboard h2 {
+    margin: 0; /* Remove margin for title */
+}
+
+.scoreboard h3 {
+    margin-top: 10px; /* Space above the top scores heading */
+}
+
+.scoreboard ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.scoreboard li {
+    margin: 5px 0; /* Space between scores */
+}
