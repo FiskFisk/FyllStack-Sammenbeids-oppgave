@@ -24,10 +24,26 @@ interface Quizzes {
 const MainMenu: React.FC = () => {
   const navigate = useNavigate();
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [fullName, setFullName] = useState<string | null>(null); // State for full name
+
+  // Fetch user details when component mounts
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/user/details", { withCredentials: true });
+        setFullName(response.data.fullnavn); // Set the full name from the response
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
 
   const handleLogout = async () => {
     try {
       await axios.post("http://localhost:5000/logout", {}, { withCredentials: true });
+      setFullName(null); // Clear full name on logout
       navigate("/");
     } catch (error) {
       console.error("Error logging out:", error);
@@ -63,9 +79,16 @@ const MainMenu: React.FC = () => {
   return (
     <div className="main-menu">
       <header className="header">
-        {/* Logo Section */}
         <div className="logo-box">
           <div className="logo" />
+        </div>
+        {/* Display Full Name on the Right Side of the Header */}
+        <div className="user-info">
+          {fullName ? (
+            <p className="user-name">{fullName}</p>
+          ) : (
+            <p className="user-name">Welcome!</p> // Fallback message if full name is not set
+          )}
         </div>
       </header>
 

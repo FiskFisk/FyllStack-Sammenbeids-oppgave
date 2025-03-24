@@ -29,16 +29,32 @@ html, body {
 }
 
 /* Header */
+
+/* Header */
 .header {
-    display: flex; /* Added this line */
+    display: flex; /* Flexbox for alignment */
+    justify-content: space-between; /* Space between logo and user info */
     align-items: center; /* Align items vertically */
     font-size: 2rem;
     font-weight: bold;
     background: var(--white);
     color: var(--black);
     width: 100%;
-    padding: 15px 0;
+    padding: 15px 20px; /* Adjust padding */
 }
+
+/* User Info */
+.user-info {
+    margin-left: auto; /* Push user info to the right */
+}
+
+.user-name {
+    font-size: 1.5rem; /* Font size for username */
+    color: var(--black); /* Text color */
+}
+
+/* ...existing styles... */
+
 
 /* Content Wrapper */
 .content {
@@ -88,12 +104,13 @@ html, body {
     background: var(--green); /* Use the green color variable */
     color: var(--white); /* Text color */
     border: none; /* Remove border */
-    padding: 20px 40px; /* Adjust padding for size */
+    padding: 20px 50px; /* Adjust padding for size */
     font-size: 2rem; /* Font size */
     border-radius: 30px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s; /* Smooth transition */
-    margin-left: 5%; /* Align to the left */
+    margin-right: 5%; /* Align to the left */
+    width: 20%;
 }
 
 .play-btn:hover {
