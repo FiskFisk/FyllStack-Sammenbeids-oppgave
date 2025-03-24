@@ -120,42 +120,76 @@ def submit_quiz():
     cursor = conn.cursor(dictionary=True)
     try:
         data = request.get_json()
-        # Checks that the info is there
-        if 'quizIdentifier' not in data or 'totalScore' not in data:
-            return jsonify({"error": "quizIdentifier and totalScore are required"}), 400
+        # Validate required fields 
+        if 'quizName' not in data or 'totalScore' not in data:
+            return jsonify({"error": "quizName and totalScore are required"}), 400
 
-        # Check if the user is authenticated (broski må være authenticated)
+        # Ensure the user is authenticated (broksi hvem er du?)
         brukerID = session.get('brukerID')
         if not brukerID:
             return jsonify({"error": "User not authenticated"}), 401
 
-        # Use the quiz name as the identifier
-        quizIdentifier = data['quizIdentifier']
-        totalScore = data['totalScore']
+        quizName = data['quizName']
+        score_value = data['totalScore']
 
-        # Verify that the quiz exists in the JSON data
-        if quizIdentifier not in quiz_data:
+        # Verify that the quiz exists in your JSON data
+        quiz_info = next((quiz for quiz in quiz_data.get("quizzes", []) 
+                          if quiz["name"] == quizName), None)
+        if not quiz_info:
             return jsonify({"error": "Quiz not found"}), 404
 
-        # Insert the quiz result into the database
-        query_insert = """
-            INSERT INTO quizResult (brukerID, quizIdentifier, totalScore)
+        # Insert the new quiz attempt into the quizResult table
+        query_insert_result = """
+            INSERT INTO quizResult (brukerID, quizName, totalScore)
             VALUES (%s, %s, %s)
         """
-        cursor.execute(query_insert, (brukerID, quizIdentifier, totalScore))
-        conn.commit()
+        cursor.execute(query_insert_result, (brukerID, quizName, score_value))
 
+        # Retrieve the user's full name from the bruker table
+        query_bruker = "SELECT fullnavn FROM bruker WHERE brukerID = %s"
+        cursor.execute(query_bruker, (brukerID,))
+        bruker = cursor.fetchone()
+        if not bruker:
+            return jsonify({"error": "User not found"}), 404
+        brukernavn = bruker['fullnavn']
+
+        # Check if a record already exists in quizWinner for this quizName
+        query_select_winner = "SELECT highScore FROM quizWinner WHERE quizName = %s"
+        cursor.execute(query_select_winner, (quizName,))
+        winner_record = cursor.fetchone()
+
+        if winner_record:
+            # Update the record if the new score is higher
+            if score_value > winner_record['highScore']:
+                query_update_winner = """
+                    UPDATE quizWinner
+                    SET winnerBrukerID = %s, winnerName = %s, highScore = %s, lastUpdated = CURRENT_TIMESTAMP
+                    WHERE quizName = %s
+                """
+                cursor.execute(query_update_winner, (brukerID, brukernavn, score_value, quizName))
+        else:
+            # No record exists yet for this quizName, so insert a new one
+            query_insert_winner = """
+                INSERT INTO quizWinner (quizName, winnerBrukerID, winnerName, highScore)
+                VALUES (%s, %s, %s, %s)
+            """
+            cursor.execute(query_insert_winner, (quizName, brukerID, brukernavn, score_value))
+
+        conn.commit()
         return jsonify({"message": "Quiz result submitted successfully"}), 201
 
     except mysql.connector.Error as e:
         print(f"Database error: {e}")
+        conn.rollback()
         return jsonify({"error": "Database error occurred"}), 500
     except Exception as e:
         print(f"Unexpected error: {e}")
+        conn.rollback()
         return jsonify({"error": "An unexpected error occurred"}), 500
     finally:
         cursor.close()
         conn.close()
+
 
 
 @app.route('/quiz/results', methods=['GET'])
