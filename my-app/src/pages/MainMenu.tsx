@@ -17,9 +17,6 @@ interface Quiz {
   questions: Question[];
 }
 
-interface Quizzes {
-  quizzes: Quiz[];
-}
 
 const MainMenu: React.FC = () => {
   const navigate = useNavigate();

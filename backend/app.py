@@ -209,7 +209,38 @@ def get_quiz_results():
     finally:
         cursor.close()
         conn.close()
-        
+
+
+# Route to get user details
+@app.route('/user/details', methods=['GET'])
+def get_user_details():
+    brukerID = session.get('brukerID')  # Get user ID from the session
+    if not brukerID:
+        return jsonify({"error": "User not authenticated"}), 401
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        query = "SELECT fullnavn FROM bruker WHERE brukerID = %s"
+        cursor.execute(query, (brukerID,))
+        user = cursor.fetchone()
+
+        if user:
+            return jsonify(user), 200
+        else:
+            return jsonify({"error": "User not found"}), 404
+
+    except mysql.connector.Error as e:
+        print(f"Database error: {e}")
+        return jsonify({"error": "Database error occurred"}), 500
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return jsonify({"error": "An unexpected error occurred"}), 500
+    finally:
+        cursor.close()
+        conn.close()
+  
 
 #MY SHAYLAAAAAAAAAAAAAA, just takes checks that everything is working, because anxiety 😔
 @app.route('/health', methods=['GET'])
