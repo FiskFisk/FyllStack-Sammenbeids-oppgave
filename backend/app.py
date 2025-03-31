@@ -213,7 +213,6 @@ def get_user_details():
         cursor.close()
         conn.close()
   
->>>>>>> 5ab0a9fa79a201a3c80a811fc0af239abda3c6a7
 
 # Get current user's full name
 @app.route('/user/name', methods=['GET'])
