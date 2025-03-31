@@ -80,7 +80,7 @@ python -m venv venv
 
 🔹 **For Windows**:
 ```sh
-.env\Scriptsctivate
+.venv\Scripts\activate
 ```
 
 🔹 **For Mac/Linux**:
