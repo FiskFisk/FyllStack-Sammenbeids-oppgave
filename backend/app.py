@@ -181,8 +181,6 @@ def get_quiz_results():
     finally:
         cursor.close()
         conn.close()
-<<<<<<< HEAD
-=======
 
 
 # Route to get user details
