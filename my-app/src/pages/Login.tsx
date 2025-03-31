@@ -24,6 +24,7 @@ const Login: React.FC = () => {
       );
 
       console.log("Login successful:", response.data);
+      // Navigate to the main menu after successful login
       navigate(response.data.redirect || "/main-menu");
     } catch (err: any) {
       console.error("Error logging in:", err);
